@@ -9,14 +9,14 @@ const accountAddress = besu.member1.accountAddress;
 
 // abi and bytecode generated from simplestorage.sol:
 // > solcjs --bin --abi simplestorage.sol
-const contractJsonPath = path.resolve(__dirname,'smart','SimpleStorage.json');
-const contractJson = JSON.parse(fs.readFileSync(contractJsonPath));
-const contractAbi = contractJson.abi;
+const contractJsonPath = path.resolve(__dirname,'smart','SimpleStorage.json'); // json 읽어와서
+const contractJson = JSON.parse(fs.readFileSync(contractJsonPath)); // Json으로  parse 하고
+const contractAbi = contractJson.abi; // json에서 abi  가져오기
 const contractBytecode = contractJson.evm.bytecode.object
 
 async function getValueAtAddress(host, deployedContractAbi, deployedContractAddress){
   const web3 = new Web3(host);
-  const contractInstance = new web3.eth.Contract(deployedContractAbi, deployedContractAddress);
+  const contractInstance = new web3.eth.Contract(deployedContractAbi, deployedContractAddress); // ABI랑 컨트렉트 주소
   const res = await contractInstance.methods.get().call();
   console.log("Obtained value at deployed contract is: "+ res);
   return res

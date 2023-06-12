@@ -10,7 +10,7 @@ async function main(){
   const web3 = new Web3(host); // Node1
   //pre seeded account - test account only
   const privateKeyA = accounts['0x0a39bf163c349663708bedc4b0c4bc79c3e439d9'].privateKey;  //Node2
-  const accountA = web3.eth.accounts.privateKeyToAccount(privateKeyA);
+  const accountA = web3.eth.accounts.privateKeyToAccount(privateKeyA); // 특정 계정의 
   var accountABalance = web3.utils.fromWei(await web3.eth.getBalance(accountA.address));
   console.log("Account A has balance of: " + accountABalance);
 
@@ -22,10 +22,10 @@ async function main(){
 
   // send some eth from A to B
   const txn = {
-    nonce: web3.utils.numberToHex(await web3.eth.getTransactionCount(accountA.address)),
-    from: accountA.address,
-    to: besu.member3.accountAddress, 
-    value: "0x10",  //amount of eth to transfer
+    nonce: web3.utils.numberToHex(await web3.eth.getTransactionCount(accountA.address)), // A가 가진 거래 개수
+    from: accountA.address, // 보내는 사람
+    to: besu.member3.accountAddress,  // 받는 사람
+    value: "0x10",  //amount of eth to transfer 물품값
     gasPrice: "0x3e8", //ETH per unit of gas
     gasLimit: "0x24A22" //max number of gas units the tx is allowed to use
   };
